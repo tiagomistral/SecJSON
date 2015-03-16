@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/auth0/node-xml-encryption.png)](https://travis-ci.org/auth0/node-xml-encryption)
+[![Build Status](https://travis-ci.org/tiagomistral/SecJSON.png)](https://travis-ci.org/tiagomistral/SecJSON)
 
 Secure JSON implementation for node.js
 
