@@ -3,9 +3,7 @@
   "version": "0.0.0",
   "description": "Additional security mechanism that use cryptographic methods to protect the payload of a JSON message",
   "main": "./lib",
-  "dependencies": {
-    "npm": "~1.2.14"
-  },
+  "dependencies": {},
   "devDependencies": {
     "mocha": "*",
     "should": "~1.2.2"
