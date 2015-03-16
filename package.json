@@ -1,0 +1,29 @@
+{
+  "name": "SecJSON",
+  "version": "0.0.0",
+  "description": "Additional security mechanism that use cryptographic methods to protect the payload of a JSON message",
+  "main": "index.js",
+  "dependencies": {
+    "npm": "~1.2.14",
+    "node-rsa": "~0.2.22"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tiagomistral/SecJSON"
+  },
+  "keywords": [
+    "json",
+    "cryptography",
+    "encryption",
+    "decryption"
+  ],
+  "author": "Tiago Santos",
+  "license": "MIT"
+  "scripts": {
+    "test": "mocha"
+  }
+}
