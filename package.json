@@ -2,12 +2,15 @@
   "name": "SecJSON",
   "version": "0.0.0",
   "description": "Additional security mechanism that use cryptographic methods to protect the payload of a JSON message",
-  "main": "index.js",
+  "main": "./lib",
   "dependencies": {
     "npm": "~1.2.14",
-    "node-rsa": "~0.2.22"
+    "node-rsa": "~0.2.22",
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "mocha": "*",
+    "should": "~1.2.2"
+  },
   "scripts": {
     "test": "mocha"
   },
@@ -19,7 +22,8 @@
     "json",
     "cryptography",
     "encryption",
-    "decryption"
+    "decryption",
+    "secjson"
   ],
   "author": "Tiago Santos",
   "license": "MIT"
