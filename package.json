@@ -5,7 +5,7 @@
   "main": "./lib",
   "dependencies": {
     "npm": "~1.2.14",
-    "node-rsa": "~0.2.22",
+    "node-rsa": "~0.2.22"
   },
   "devDependencies": {
     "mocha": "*",
