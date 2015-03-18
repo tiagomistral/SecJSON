@@ -4,7 +4,11 @@
   "description": "Additional security mechanism that use cryptographic methods to protect the payload of a JSON message",
   "main": "./lib",
   "dependencies": {
-    "node-rsa":"~0.2.22"
+    "node-rsa":"~0.2.22",
+    "node-forge": "0.2.24",
+    "async": "~0.2.7",
+    "ejs": "~0.8.3",
+    "node-forge": "0.2.24"
   },
   "devDependencies": {
     "mocha": "*",
