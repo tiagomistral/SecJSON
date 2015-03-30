@@ -21,10 +21,9 @@ describe('integration', function() {
       encryptionAlgorithm: 'http://www.w3.org/2001/04/xmlenc#tripledes-cbc',
       keyEncryptionAlgorighm: 'http://www.w3.org/2001/04/xmlenc#rsa-1_5'
     };
-    xmlenc.encryptKeyInfoWithScheme('password', options, 'RSA-OAEP', function() {
-
-    	//console.log('callback');
-	});
+    xmlenc.encryptKeyInfoWithScheme('password', options, 'RSA-OAEP', function(err, result) {
+    	console.log(result);
+    });
     done();
   });
 
