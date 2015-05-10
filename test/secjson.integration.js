@@ -25,7 +25,6 @@ describe('integration', function() {
     var result = utils.renderTemplate('keyinfo', params);
     console.log(result);
 
-    crypto.encrypt(payload);
   	 //console.log(xmlenc.encrypt(payload));
 	   //assert.equal(xmlenc.decrypt(xmlenc.encrypt(payload)), payload);
     done();
