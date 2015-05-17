@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/tiagomistral/SecJSON.png)](https://travis-ci.org/tiagomistral/SecJSON)
-[![Dependency Status][david-image]][https://david-dm.org/tiagomistral/secjson.svg]
+[![Dependency Status][https://david-dm.org/tiagomistral/secjson.svg]][https://david-dm.org/tiagomistral/secjson]
 
 Secure JSON implementation for node.js
 
