@@ -2,7 +2,8 @@ var assert = require('assert'),
     fs = require('fs'),
     xmlenc = require('../lib'),
     utils  = require('../lib/utils'),
-    pki = require('node-forge').pki;
+    pki = require('node-forge').pki,
+    crypto = require('crypto');
 
 var crypto = require('crypto');
 
@@ -38,10 +39,30 @@ describe('integration', function() {
       encryptionAlgorithm: 'http://www.w3.org/2001/04/xmlenc#tripledes-cbc',
       keyEncryptionAlgorighm: 'http://www.w3.org/2001/04/xmlenc#rsa-1_5'
     };
-    /*xmlenc.encryptKeyInfoWithScheme('password', options, 'RSA-OAEP', function(err, result) {
+    xmlenc.encryptKeyInfoWithScheme('password', options, 'RSA-OAEP', function(err, result) {
     	console.log(result);
-    });*/
+    });
     done();
   });
 
+  it('encrypt', function (done) {
+    var options = {
+      rsa_pub: fs.readFileSync(__dirname + '/test-auth0_rsa.pub'),
+      pem: fs.readFileSync(__dirname + '/test-auth0.pem'),
+      key: fs.readFileSync(__dirname + '/test-auth0.key'),
+      encryptionAlgorithm: 'http://www.w3.org/2001/04/xmlenc#tripledes-cbc',
+      keyEncryptionAlgorighm: 'http://www.w3.org/2001/04/xmlenc#rsa-1_5'
+    };
+
+
+    xmlenc.encrypt('content to encrypt', options, function(err, result) { 
+      console.log(result);
+    });
+
+    console.log('\n\n\n\nrandomBytes: ' + crypto.randomBytes(32));
+
+     //console.log(xmlenc.encrypt(payload));
+     //assert.equal(xmlenc.decrypt(xmlenc.encrypt(payload)), payload);
+    done();
+  });
 });
