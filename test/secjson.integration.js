@@ -21,17 +21,33 @@ describe('integration', function() {
 
     secjson.encrypt('content to encrypt', options, function(err, result) { 
        console.log(result);
-       var json = JSON.parse(result);
-       console.log("SERÁ: "+ json.EncryptedData.EncryptionMethod);
        
        secjson.decrypt(result, options, function(err, dec) { 
         console.log(dec);
        });
     });
 
+    done();
+  });
 
+  it('encrypt & decrypt RSA OAEP', function (done) {
 
+    var options = {
+      rsa_pub: fs.readFileSync(__dirname + '/test-auth0_rsa.pub'),
+      pem: fs.readFileSync(__dirname + '/test-auth0.pem'),
+      key: fs.readFileSync(__dirname + '/test-auth0.key'),
+      encryptionAlgorithm: 'http://www.w3.org/2001/04/xmlenc#aes128-cbc',
+      keyEncryptionAlgorighm: 'http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p'
+    };
 
+    secjson.encrypt('content to encrypt', options, function(err, result) { 
+       console.log(result);
+       
+       secjson.decrypt(result, options, function(err, dec) { 
+        console.log(dec);
+       });
+    });
+    
     done();
   });
 });
