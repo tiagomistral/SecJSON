@@ -1,6 +1,6 @@
 var assert = require('assert'),
     fs = require('fs'),
-    xmlenc = require('../lib'),
+    secjson = require('../lib'),
     utils  = require('../lib/utils'),
     pki = require('node-forge').pki,
     crypto = require('crypto');
@@ -9,43 +9,8 @@ var crypto = require('crypto');
 
 describe('integration', function() {
 
-  it('should decrypt assertion with aes128', function (done) {
-  	var payload = 'hello world';
-    var rsa_pub = pki.publicKeyFromPem(fs.readFileSync(__dirname + '/test-auth0_rsa.pub'));
-    var encrypted = rsa_pub.encrypt('simmetricKey'.toString('binary'), 'RSA-OAEP'); 
-    var base64EncodedEncryptedKey = new Buffer(rsa_pub.encrypt('simmetricKey'.toString('binary'), 'RSA-OAEP'), 'binary').toString('base64');
+  it('encrypt & decrypt RSA 1.5', function (done) {
 
-    var pem = utils.pemToCert(fs.readFileSync(__dirname + '/test-auth0.pem').toString());
-
-    var params = {
-      encryptedKey:  base64EncodedEncryptedKey, 
-      encryptionPublicCert: pem, 
-      keyEncryptionMethod: 'http://www.w3.org/2001/04/xmlenc#rsa-1_5'
-    };
-  
-    var result = utils.renderTemplate('keyinfo', params);
-    console.log(result);
-
-  	 //console.log(xmlenc.encrypt(payload));
-	   //assert.equal(xmlenc.decrypt(xmlenc.encrypt(payload)), payload);
-    done();
-  });
-
-  it('encryptKeyInfoWithScheme', function(done){
-  	var options = {
-      rsa_pub: fs.readFileSync(__dirname + '/test-auth0_rsa.pub'),
-      pem: fs.readFileSync(__dirname + '/test-auth0.pem'),
-      key: fs.readFileSync(__dirname + '/test-auth0.key'),
-      encryptionAlgorithm: 'http://www.w3.org/2001/04/xmlenc#tripledes-cbc',
-      keyEncryptionAlgorighm: 'http://www.w3.org/2001/04/xmlenc#rsa-1_5'
-    };
-    xmlenc.encryptKeyInfoWithScheme('password', options, 'RSA-OAEP', function(err, result) {
-    	console.log(result);
-    });
-    done();
-  });
-
-  it('encrypt', function (done) {
     var options = {
       rsa_pub: fs.readFileSync(__dirname + '/test-auth0_rsa.pub'),
       pem: fs.readFileSync(__dirname + '/test-auth0.pem'),
@@ -54,15 +19,19 @@ describe('integration', function() {
       keyEncryptionAlgorighm: 'http://www.w3.org/2001/04/xmlenc#rsa-1_5'
     };
 
-
-    xmlenc.encrypt('content to encrypt', options, function(err, result) { 
-      console.log(result);
+    secjson.encrypt('content to encrypt', options, function(err, result) { 
+       console.log(result);
+       var json = JSON.parse(result);
+       console.log("SERÁ: "+ json.EncryptedData.EncryptionMethod);
+       
+       secjson.decrypt(result, options, function(err, dec) { 
+        console.log(dec);
+       });
     });
 
-    console.log('\n\n\n\nrandomBytes: ' + crypto.randomBytes(32));
 
-     //console.log(xmlenc.encrypt(payload));
-     //assert.equal(xmlenc.decrypt(xmlenc.encrypt(payload)), payload);
+
+
     done();
   });
 });
