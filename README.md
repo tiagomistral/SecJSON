@@ -44,8 +44,8 @@ If you have found a bug or if you have a feature request, please report them at 
 [npm-url]: https://npmjs.org/package/secjson
 [github-tag]: http://img.shields.io/github/tag/tiagomistral/secjson.svg?style=flat-square
 [github-url]: https://github.com/tiagomistral/secjson/tags
-[travis-image]: https://img.shields.io/travis/tiagomistral/secjson.svg?style=flat-square
-[travis-url]: https://travis-ci.org/tiagomistral/secjson
+[travis-image]: https://img.shields.io/travis/tiagomistral/SecJSON.svg?style=flat-square
+[travis-url]: https://travis-ci.org/tiagomistral/SecJSON
 [coveralls-image]: https://img.shields.io/coveralls/tiagomistral/secjson.svg?style=flat-square
 [coveralls-url]: https://coveralls.io/r/tiagomistral/secjson?branch=master
 [license-image]: http://img.shields.io/npm/l/secjson.svg?style=flat-square
@@ -54,3 +54,4 @@ If you have found a bug or if you have a feature request, please report them at 
 [downloads-url]: https://npmjs.org/package/secjson
 [david-image]: http://img.shields.io/david/tiagomistral/secjson.svg?style=flat-square
 [david-url]: https://david-dm.org/tiagomistral/secjson
+ [![Build Status](https://travis-ci.org/tiagomistral/SecJSON.png)](https://travis-ci.org/tiagomistral/SecJSON)
