@@ -54,4 +54,3 @@ If you have found a bug or if you have a feature request, please report them at 
 [downloads-url]: https://npmjs.org/package/secjson
 [david-image]: http://img.shields.io/david/tiagomistral/secjson.svg?style=flat-square
 [david-url]: https://david-dm.org/tiagomistral/secjson
- [![Build Status](https://travis-ci.org/tiagomistral/SecJSON.png)](https://travis-ci.org/tiagomistral/SecJSON)
