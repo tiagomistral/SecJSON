@@ -1,14 +1,13 @@
 {
-  "name": "SecJSON",
-  "version": "0.0.0",
+  "name": "secjson",
+  "version": "1.0.0",
   "description": "Additional security mechanism that use cryptographic methods to protect the payload of a JSON message",
   "main": "./lib",
   "dependencies": {
     "node-rsa":"~0.2.23",
-    "node-forge": "0.2.24",
-    "async": "~0.9.0",
+    "async": "~1.0.0",
     "ejs": "~2.3.1",
-    "node-forge": "0.6.26"
+    "node-forge": "~0.6.29"
   },
   "devDependencies": {
     "mocha": "*",
