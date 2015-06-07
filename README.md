@@ -5,17 +5,14 @@
 [![License][license-image]][license-url]
 [![Downloads][downloads-image]][downloads-url]
 
-Secure JSON implementation for node.js
+Secure JSON implementation for node.js. 
+SecJSON allow encrypt/decrypt a message or a specific value of an JSON object.
 
 ## Usage
 
     npm install secjson
 
 ### encrypt
-
-SecJSON allow encrypt a message or a specific value of an JSON object.
-
-Example 1: Encrypt the message 'content to encrypt':
 
 ~~~js
 var secjson = require('secjson');
@@ -53,7 +50,31 @@ Result:
 }
 ~~~
 
-Example 2: Encrypt the second book (Sword of Honour) of the object "obj".
+### decrypt
+
+~~~js
+
+var decryptOptions = {
+  key: fs.readFileSync(__dirname + '/test-auth0.key')
+};
+
+       
+secjson.decrypt(encryptResult, decryptOptions, function(err, dec) { 
+  console.log(dec);
+});
+~~~
+
+Result:
+
+~~~json
+
+content to encrypt
+
+~~~
+
+### JSON encrypt
+
+Encrypt the second book (Sword of Honour) of the object "obj".
 
 ~~~js
 
@@ -161,33 +182,7 @@ Result:
 ~~~
 
 
-### decrypt
-
-To decrypt the previous examples:
-
-Example 1:
-
-~~~js
-
-var decryptOptions = {
-	key: fs.readFileSync(__dirname + '/test-auth0.key')
-};
-
-       
-secjson.decrypt(encryptResult, decryptOptions, function(err, dec) { 
-	console.log(dec);
-});
-~~~
-
-Result:
-
-~~~json
-
-content to encrypt
-
-~~~
-
-Example 2:
+### JSON decrypt
 
 ~~~js
 
