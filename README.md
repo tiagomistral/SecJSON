@@ -53,7 +53,7 @@ Result:
 }
 ~~~
 
-Example 2: Encrypt the second book (Sword of Honour) of the object "store".
+Example 2: Encrypt the second book (Sword of Honour) of the object "obj".
 
 ~~~js
 

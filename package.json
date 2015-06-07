@@ -5,7 +5,7 @@
   "main": "./lib",
   "dependencies": {
     "node-rsa":"~0.2.23",
-    "async": "~1.0.0",
+    "async": "~1.2.0",
     "deasync": "~0.1.0",
     "ejs": "~2.3.1",
     "node-forge": "~0.6.29"
