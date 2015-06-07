@@ -1,7 +1,6 @@
 var assert = require('assert'),
     fs = require('fs'),
     secjson = require('../lib'),
-    utils  = require('../lib/utils'),
     pki = require('node-forge').pki,
     crypto = require('crypto');
 
@@ -14,15 +13,18 @@ describe('integration', function() {
     var options = {
       rsa_pub: fs.readFileSync(__dirname + '/test-auth0_rsa.pub'),
       pem: fs.readFileSync(__dirname + '/test-auth0.pem'),
-      key: fs.readFileSync(__dirname + '/test-auth0.key'),
       encryptionAlgorithm: 'http://www.w3.org/2001/04/xmlenc#tripledes-cbc',
       keyEncryptionAlgorighm: 'http://www.w3.org/2001/04/xmlenc#rsa-1_5'
+    };
+
+    var decryptOptions = {
+      key: fs.readFileSync(__dirname + '/test-auth0.key')
     };
 
     secjson.encrypt('content to encrypt', options, function(err, result) { 
        console.log(result);
        
-       secjson.decrypt(result, options, function(err, dec) { 
+       secjson.decrypt(result, decryptOptions, function(err, dec) { 
         console.log(dec);
        });
     });
@@ -35,15 +37,18 @@ describe('integration', function() {
     var options = {
       rsa_pub: fs.readFileSync(__dirname + '/test-auth0_rsa.pub'),
       pem: fs.readFileSync(__dirname + '/test-auth0.pem'),
-      key: fs.readFileSync(__dirname + '/test-auth0.key'),
       encryptionAlgorithm: 'http://www.w3.org/2001/04/xmlenc#aes128-cbc',
       keyEncryptionAlgorighm: 'http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p'
+    };
+
+    var decryptOptions = {
+      key: fs.readFileSync(__dirname + '/test-auth0.key')
     };
 
     secjson.encrypt('content to encrypt', options, function(err, result) { 
        console.log(result);
        
-       secjson.decrypt(result, options, function(err, dec) { 
+       secjson.decrypt(result, decryptOptions, function(err, dec) { 
         console.log(dec);
        });
     });
@@ -56,9 +61,12 @@ describe('integration', function() {
     var options = {
       rsa_pub: fs.readFileSync(__dirname + '/test-auth0_rsa.pub'),
       pem: fs.readFileSync(__dirname + '/test-auth0.pem'),
-      key: fs.readFileSync(__dirname + '/test-auth0.key'),
       encryptionAlgorithm: 'http://www.w3.org/2001/04/xmlenc#aes128-cbc',
       keyEncryptionAlgorighm: 'http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p'
+    };
+
+    var decryptOptions = {
+      key: fs.readFileSync(__dirname + '/test-auth0.key')
     };
 
     var obj = {
@@ -102,7 +110,7 @@ describe('integration', function() {
     secjson.jsonEncrypt(obj, jsonKeyPath, options, function(err, result) { 
        console.log(JSON.stringify(result));
 
-       secjson.jsonDecrypt(result, jsonKeyPath, options, function(err, dec) {
+       secjson.jsonDecrypt(result, jsonKeyPath, decryptOptions, function(err, dec) {
           console.log(JSON.stringify(dec));
 
        });

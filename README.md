@@ -23,7 +23,6 @@ var secjson = require('secjson');
 var options = {
       rsa_pub: fs.readFileSync(__dirname + '/test-auth0_rsa.pub'),
       pem: fs.readFileSync(__dirname + '/test-auth0.pem'),
-      key: fs.readFileSync(__dirname + '/test-auth0.key'),
       encryptionAlgorithm: 'http://www.w3.org/2001/04/xmlenc#aes128-cbc',
       keyEncryptionAlgorighm: 'http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p'
     };
@@ -56,12 +55,11 @@ Result:
 
 Example 2: Encrypt the second book (Sword of Honour) of the object "store".
 
-~~~json
+~~~js
 
 var options = {
       rsa_pub: fs.readFileSync(__dirname + '/test-auth0_rsa.pub'),
       pem: fs.readFileSync(__dirname + '/test-auth0.pem'),
-      key: fs.readFileSync(__dirname + '/test-auth0.key'),
       encryptionAlgorithm: 'http://www.w3.org/2001/04/xmlenc#aes128-cbc',
       keyEncryptionAlgorighm: 'http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p'
     };
@@ -103,9 +101,8 @@ var options = {
         }
       };
 
-    var jsonKeyPath = 'store.book[1]';
-    secjson.jsonEncrypt(obj, jsonKeyPath, options, function(err, result) { 
-       console.log(JSON.stringify(result));
+    secjson.jsonEncrypt(obj, 'store.book[1]', options, function(err, encryptJsonObject) { 
+       console.log(JSON.stringify(encryptJsonObject));
 	}
 ~~~
 
@@ -166,16 +163,100 @@ Result:
 
 ### decrypt
 
+To decrypt the previous examples:
+
+Example 1:
+
+~~~js
+
+var decryptOptions = {
+      key: fs.readFileSync(__dirname + '/test-auth0.key')
+    };
+
+       
+       secjson.decrypt(encryptResult, decryptOptions, function(err, dec) { 
+        console.log(dec);
+       });
+~~~
+
+Result:
+
+~~~json
+
+content to encrypt
+
+~~~
+
+Example 2:
+
+~~~js
+
+var decryptOptions = {
+      key: fs.readFileSync(__dirname + '/test-auth0.key')
+    };
+
+secjson.jsonDecrypt(encryptJsonObject, 'store.book[1]', decryptOptions, function(err, dec) {
+          console.log(JSON.stringify(dec));
+
+       });
+
+~~~
+
+Result:
+
+~~~json
+
+{
+   "store":{
+      "book":[
+         {
+            "category":"reference",
+            "author":"Nigel Rees",
+            "title":"Sayings of the Century",
+            "price":8.95
+         },
+         {
+            "category":"fiction",
+            "author":"Evelyn Waugh",
+            "title":"Sword of Honour",
+            "price":12.99
+         },
+         {
+            "category":"fiction",
+            "author":"Herman Melville",
+            "title":"Moby Dick",
+            "isbn":"0-553-21311-3",
+            "price":8.99
+         },
+         {
+            "category":"fiction",
+            "author":"J. R. R. Tolkien",
+            "title":"The Lord of the Rings",
+            "isbn":"0-395-19395-8",
+            "price":22.99
+         }
+      ],
+      "bicycle":{
+         "color":"red",
+         "price":19.95
+      }
+   }
+}
+
+~~~
 
 ## Supported algorithms
 
 Currently the library supports:
 
 * EncryptedKey to transport symmetric key using:
+  * http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p
   * http://www.w3.org/2001/04/xmlenc#rsa-1_5
 
-* EncryptedData using:
+* EncryptedData using:  
+  * http://www.w3.org/2001/04/xmlenc#aes128-cbc
   * http://www.w3.org/2001/04/xmlenc#aes256-cbc
+  * http://www.w3.org/2001/04/xmlenc#tripledes-cbc
 
 However, you can fork and implement your own algorithm. The code supports adding more algorithms easily
 
