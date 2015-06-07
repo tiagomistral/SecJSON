@@ -21,15 +21,15 @@ Example 1: Encrypt the message 'content to encrypt':
 var secjson = require('secjson');
 
 var options = {
-      rsa_pub: fs.readFileSync(__dirname + '/test-auth0_rsa.pub'),
-      pem: fs.readFileSync(__dirname + '/test-auth0.pem'),
-      encryptionAlgorithm: 'http://www.w3.org/2001/04/xmlenc#aes128-cbc',
-      keyEncryptionAlgorighm: 'http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p'
-    };
+	rsa_pub: fs.readFileSync(__dirname + '/test-auth0_rsa.pub'),
+	pem: fs.readFileSync(__dirname + '/test-auth0.pem'),
+	encryptionAlgorithm: 'http://www.w3.org/2001/04/xmlenc#aes128-cbc',
+	keyEncryptionAlgorighm: 'http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p'
+};
 
-    secjson.encrypt('content to encrypt', options, function(err, result) { 
-       console.log(result);
-   }
+secjson.encrypt('content to encrypt', options, function(err, result) { 
+	console.log(result);
+}
 ~~~
 
 Result:
@@ -101,9 +101,9 @@ var options = {
         }
       };
 
-    secjson.jsonEncrypt(obj, 'store.book[1]', options, function(err, encryptJsonObject) { 
-       console.log(JSON.stringify(encryptJsonObject));
-	}
+secjson.jsonEncrypt(obj, 'store.book[1]', options, function(err, encryptJsonObject) { 
+	console.log(JSON.stringify(encryptJsonObject));
+}
 ~~~
 
 Result:
@@ -170,13 +170,13 @@ Example 1:
 ~~~js
 
 var decryptOptions = {
-      key: fs.readFileSync(__dirname + '/test-auth0.key')
-    };
+	key: fs.readFileSync(__dirname + '/test-auth0.key')
+};
 
        
-       secjson.decrypt(encryptResult, decryptOptions, function(err, dec) { 
-        console.log(dec);
-       });
+secjson.decrypt(encryptResult, decryptOptions, function(err, dec) { 
+	console.log(dec);
+});
 ~~~
 
 Result:
@@ -192,13 +192,12 @@ Example 2:
 ~~~js
 
 var decryptOptions = {
-      key: fs.readFileSync(__dirname + '/test-auth0.key')
-    };
+	key: fs.readFileSync(__dirname + '/test-auth0.key')
+};
 
 secjson.jsonDecrypt(encryptJsonObject, 'store.book[1]', decryptOptions, function(err, dec) {
-          console.log(JSON.stringify(dec));
-
-       });
+	console.log(JSON.stringify(dec));
+});
 
 ~~~
 
