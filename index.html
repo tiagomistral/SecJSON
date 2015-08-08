@@ -47,6 +47,165 @@
 <p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
 
 <h3>
+<a id="algorithms" class="anchor" href="#algorithms" aria-hidden="true"><span class="octicon octicon-link"></span></a>Algorithms</h3>
+<p>EncryptedKey to transport symmetric key:</p>
+
+<h4><a name="sec-RSA-1_5" id="sec-RSA-1_5">RSA Version 1.5</a></h4>
+<dl>
+  <dt>Identifier:</dt>
+    <dd><a id="rsa-1_5" href="http://tiagomistral.github.io/SecJSON#rsa-1_5"
+      name="rsa-1_5">http://tiagomistral.github.io/SecJSON#rsa-1_5</a>
+    (REQUIRED)</dd>
+</dl>
+
+<p>The RSAES-PKCS1-v1_5 algorithm, specified in RFC 2437 [<a
+href="#ref-PKCS1">PKCS1</a>], takes no explicit parameters. An example of an
+RSA Version 1.5 <code>EncryptionMethod</code> element is:</p>
+<pre class="json-example">"EncryptedMethod": {
+  "Algorithm": "http://tiagomistral.github.io/SecJSON#rsa-1_5"
+}</pre>
+
+<p>The <code>CipherValue</code> for such an encrypted key is the base64 [<a
+href="#ref-MIME">MIME</a>] encoding of the octet string computed as per RFC
+2437 [<a href="#ref-PKCS1">PKCS1</a>, section 7.2.1: Encryption operation].
+As specified in the EME-PKCS1-v1_5 function RFC 2437 [<a
+href="#ref-PKCS1">PKCS1</a>, section 9.1.2.1], the value input to the key
+transport function is as follows:</p>
+<pre class="xml-example">   CRYPT ( PAD ( KEY ))</pre>
+
+<p>where the padding is of the following special form:</p>
+<pre class="xml-example">   02 | PS* | 00 | key</pre>
+
+<p>where "|" is concatenation, "02" and "00" are fixed octets of the
+corresponding hexadecimal value, PS is a string of strong pseudo-random
+octets [<a href="#ref-RANDOM">RANDOM</a>] at least eight octets long,
+containing no zero octets, and long enough that the value of the quantity
+being CRYPTed is one octet shorter than the RSA modulus, and "key" is the key
+being transported. The key is 192 bits for TRIPLEDES and 128, 192, or 256
+bits for AES. Support of this key transport algorithm for transporting 192
+bit keys is MANDATORY to implement. Support of this algorithm for
+transporting other keys is OPTIONAL. RSA-OAEP is RECOMMENDED for the
+transport of AES keys.</p>
+
+<p>The resulting base64 [<a href="#ref-MIME">MIME</a>] string is the value of
+the child text node of the <code>CipherData</code> element, e.g.</p>
+<pre class="json-example">"CipherData": {
+    "CipherValue": "Ad/F7DvLVc0NwmI7kS3JvMJE0Qh1Jf452hoe1FXVghjRimy7HcDjpZurM9+JSxlqSE0kY98xuqudosgXABdqDYz4NPqRXEsUVclx0JItyB/Jv7/qgHSG/hCh9cyZkf0yhpfbugiHLDvPhHLjCB/dUXoYEETHMWQ0mXbJGG3zyIJwm3rRbmmrWanitejs30oNxb0R3X5Ao5aOZFHZ/prw+6Ant7eFsdWhKpqMx8mCSXlQwMZqdkdi6GHVCKSRnFY9EaU3PIsWUM7s8+wc2d2xxxavnailwQmpA0Gdg4hUDiNkIgpPxzWWZQ7y0ogWiHDSJcsd1N9hq0bb2VrjXcTZxQ=="
+}</pre>
+
+<h4><a name="sec-RSA-OAEP" id="sec-RSA-OAEP">RSA-OAEP</a></h4>
+<dl>
+  <dt>Identifier:</dt>
+    <dd><a id="rsa-oaep-mgf1p"
+      href="http://tiagomistral.github.io/SecJSON#rsa-oaep-mgf1p"
+      name="rsa-oaep-mgf1p">http://tiagomistral.github.io/SecJSON#rsa-oaep-mgf1p</a>
+      (REQUIRED)</dd>
+</dl>
+
+<p class="">The RSAES-OAEP-ENCRYPT algorithm, as specified in RFC 2437 [<a
+href="#ref-PKCS1">PKCS1</a>], takes three parameters. The two user specified
+parameters are a MANDATORY message digest function and an OPTIONAL encoding
+octet string <code>OAEPparams</code>. The message digest function is
+indicated by the <code>Algorithm</code> attribute of a child
+<code>ds:DigestMethod</code> element and the mask generation function, the
+third parameter, is always MGF1 with SHA1 (mgf1SHA1Identifier). Both the
+message digest and mask generation functions are used in the EME-OAEP-ENCODE
+operation as part of RSAES-OAEP-ENCRYPT. The encoding octet string is the
+base64 decoding of the content of an optional <code>OAEPparams</code> child
+element . If no <code>OAEPparams</code> child is provided, a null string is
+used.</p>
+<pre class="xml-dtd">JSON Schema Definition:
+ {
+   "$schema":"http://json-schema.org/draft-04/schema#",
+   "type":"object",
+   "properties":{
+      "EncryptionMethod":{
+         "type":"string"
+      }
+   },
+   "required":[
+      "EncryptionMethod"
+   ]
+}</pre>
+
+<p>An example of an RSA-OAEP element is:</p>
+<pre class="xml-example">  &lt;EncryptionMethod
+     Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p"&gt;
+    &lt;OAEPparams&gt; 9lWu3Q== &lt;/OAEPparams&gt;
+    &lt;ds:DigestMethod
+        Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/&gt;
+  &lt;EncryptionMethod&gt;</pre>
+
+<p>The <code>CipherValue</code> for an RSA-OAEP encrypted key is the base64
+[<a href="#ref-MIME">MIME</a>] encoding of the octet string computed as per
+RFC 2437 [<a href="#ref-PKCS1">PKCS1</a>, section 7.1.1: Encryption
+operation]. As described in the EME-OAEP-ENCODE function RFC 2437 [<a
+href="#ref-PKCS1">PKCS1</a>, section 9.1.1.1], the value input to the key
+transport function is calculated using the message digest function and string
+specified in the <code>DigestMethod</code> and <code>OAEPparams</code>
+elements and using the mask generator function MGF1 (with SHA1) specified in
+RFC 2437. The desired output length for EME-OAEP-ENCODE is one byte shorter
+than the RSA modulus.</p>
+
+<p>The transported key size is 192 bits for TRIPLEDES and 128, 192, or 256
+bits for AES. Implementations MUST implement RSA-OAEP for the transport of
+128 and 256 bit keys. They MAY implement RSA-OAEP for the transport of other
+keys.</p>
+
+
+<p>EncryptedData using:</p>
+
+<h4><a name="sec-tripledes-cbc" id="sec-tripledes-cbc">Triple
+DES</a></h4>
+<dl>
+  <dt>Identifier:</dt>
+    <dd><a id="tripledes-cbc" name="tripledes-cbc"
+      href="http://www.w3.org/2001/04/xmlenc#tripledes-cbc">http://www.w3.org/2001/04/xmlenc#tripledes-cbc</a>
+      (REQUIRED)</dd>
+</dl>
+
+<p>ANSI X9.52 [<a href="#ref-TRIPLEDES">TRIPLEDES</a>] specifies three
+sequential FIPS 46-3 [<a href="#ref-DES">DES</a>] operations. The XML
+Encryption TRIPLEDES consists of a DES encrypt, a DES decrypt, and a DES
+encrypt used in the Cipher Block Chaining (CBC) mode with 192 bits of key and
+a 64 bit Initialization Vector (IV). Of the key bits, the first 64 are used
+in the first DES operation, the second 64 bits in the middle DES operation,
+and the third 64 bits in the last DES operation.</p>
+
+<p>Note: Each of these 64 bits of key contain 56 effective bits and 8 parity
+bits. Thus there are only 168 operational bits out of the 192 being
+transported for a TRIPLEDES key. (Depending on the criterion used for
+analysis, the effective strength of the key may be thought to be 112 bits
+(due to meet in the middle attacks) or even less.)</p>
+
+<p>The resulting cipher text is prefixed by the IV. If included in XML
+output, it is then base64 encoded. An example TRIPLEDES EncryptionMethod is
+as follows:</p>
+<pre class="xml-example">  &lt;EncryptionMethod
+   Algorithm="http://www.w3.org/2001/04/xmlenc#tripledes-cbc"/&gt;</pre>
+
+<h4><a name="sec-AES" id="sec-AES">AES</a></h4>
+<dl>
+  <dt>Identifier:</dt>
+    <dd><a id="aes128-cbc" href="http://www.w3.org/2001/04/xmlenc#aes128-cbc"
+      name="aes128-cbc">http://www.w3.org/2001/04/xmlenc#aes128-cbc</a>
+      (REQUIRED)</dd>
+    <dd><a id="aes192-cbc" href="http://www.w3.org/2001/04/xmlenc#aes192-cbc"
+      name="aes192-cbc">http://www.w3.org/2001/04/xmlenc#aes192-cbc</a>
+      (OPTIONAL)</dd>
+    <dd><a id="aes256-cbc" href="http://www.w3.org/2001/04/xmlenc#aes256-cbc"
+      name="aes256-cbc">http://www.w3.org/2001/04/xmlenc#aes256-cbc</a>
+      (REQUIRED)</dd>
+</dl>
+
+<p>[<a href="#ref-AES">AES</a>] is used in the Cipher Block Chaining (CBC)
+mode with a 128 bit initialization vector (IV). The resulting cipher text is
+prefixed by the IV. If included in XML output, it is then base64 encoded. An
+example AES EncryptionMethod is as follows:</p>
+<pre class="xml-example">  &lt;EncryptionMethod
+   Algorithm="http://www.w3.org/2001/04/xmlenc#aes128-cbc"/&gt;</pre>
+
+<h3>
 <a id="authors-and-contributors" class="anchor" href="#authors-and-contributors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
 
 <p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor’s GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
@@ -55,8 +214,46 @@
 <a id="support-or-contact" class="anchor" href="#support-or-contact" aria-hidden="true"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
 
 <p>Having trouble with Pages? Check out our <a href="https://help.github.com/pages">documentation</a> or <a href="https://github.com/contact">contact support</a> and we’ll help you sort it out.</p>
+
+<h3>
+<a id="sec-References" class="anchor" href="#sec-References" name="sec-References" aria-hidden="true"><span class="octicon octicon-link"></span></a>References</h3>
+
+<dl>
+  <dt><a id="ref-PKCS1" name="ref-PKCS1">PKCS1</a></dt>
+    <dd><a href="http://www.ietf.org/rfc/rfc2437.txt">RFC 2437: PKCS #1: RSA
+      Cryptography Specifications Version 2.0.</a> B. Kaliski and J. Staddon.
+      Informational, October 1998.</dd>
+    <dd><a
+      href="http://www.ietf.org/rfc/rfc2437.txt">http://www.ietf.org/rfc/rfc2437.txt</a></dd>
+  <dt><a id="ref-MIME" name="ref-MIME">MIME</a></dt>
+    <dd><a href="http://www.ietf.org/rfc/rfc2045.txt">RFC 2045: Multipurpose
+      Internet Mail Extensions (MIME) Part One: Format of Internet Message
+      Bodies</a>. N. Freed and N. Borenstein. Standards Track, November
+    1996.</dd>
+    <dd><a
+      href="http://www.ietf.org/rfc/rfc2045.txt">http://www.ietf.org/rfc/rfc2045.txt</a></dd>
+<dt><a name="ref-DES" id="ref-DES">DES</a></dt>
+    <dd><a
+      href="http://csrc.nist.gov/publications/fips/fips46-3/fips46-3.pdf">NIST
+      FIPS 46-3: Data Encryption Standard</a> (DES). October 1999.</dd>
+    <dd><a
+      href="http://csrc.nist.gov/publications/fips/fips46-3/fips46-3.pdf">http://csrc.nist.gov/publications/fips/fips46-3/fips46-3.pdf</a></dd>
+<dt><a name="ref-TRIPLEDES" id="ref-TRIPLEDES">TRIPLEDES</a></dt>
+    <dd>ANSI X9.52: Triple Data Encryption Algorithm Modes of Operation.
+    1998.</dd>
+<dt><a name="ref-AES" id="ref-AES">AES</a></dt>
+    <dd><a
+      href="http://csrc.nist.gov/publications/fips/fips197/fips-197.pdf">NIST
+      FIPS 197: Advanced Encryption Standard (AES)</a>. November 2001.</dd>
+    <dd><a
+      href="http://csrc.nist.gov/publications/fips/fips197/fips-197.pdf">http://csrc.nist.gov/publications/fips/fips197/fips-197.pdf</a></dd>
+</dl>
+
       </section>
     </div>
+
+
+
 
     <!-- FOOTER  -->
     <div id="footer_wrap" class="outer">
