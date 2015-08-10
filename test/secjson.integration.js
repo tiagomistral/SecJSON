@@ -13,8 +13,8 @@ describe('integration', function() {
     var options = {
       rsa_pub: fs.readFileSync(__dirname + '/test-auth0_rsa.pub'),
       pem: fs.readFileSync(__dirname + '/test-auth0.pem'),
-      encryptionAlgorithm: 'http://www.w3.org/2001/04/xmlenc#tripledes-cbc',
-      keyEncryptionAlgorighm: 'http://www.w3.org/2001/04/xmlenc#rsa-1_5'
+      encryptionAlgorithm: 'http://tiagomistral.github.io/SecJSON#tripledes-cbc',
+      keyEncryptionAlgorighm: 'http://tiagomistral.github.io/SecJSON#rsa-1_5'
     };
 
     var decryptOptions = {
@@ -37,8 +37,8 @@ describe('integration', function() {
     var options = {
       rsa_pub: fs.readFileSync(__dirname + '/test-auth0_rsa.pub'),
       pem: fs.readFileSync(__dirname + '/test-auth0.pem'),
-      encryptionAlgorithm: 'http://www.w3.org/2001/04/xmlenc#aes128-cbc',
-      keyEncryptionAlgorighm: 'http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p'
+      encryptionAlgorithm: 'http://tiagomistral.github.io/SecJSON#aes128-cbc',
+      keyEncryptionAlgorighm: 'http://tiagomistral.github.io/SecJSON#rsa-oaep-mgf1p'
     };
 
     var decryptOptions = {
@@ -61,8 +61,8 @@ describe('integration', function() {
     var options = {
       rsa_pub: fs.readFileSync(__dirname + '/test-auth0_rsa.pub'),
       pem: fs.readFileSync(__dirname + '/test-auth0.pem'),
-      encryptionAlgorithm: 'http://www.w3.org/2001/04/xmlenc#aes128-cbc',
-      keyEncryptionAlgorighm: 'http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p'
+      encryptionAlgorithm: 'http://tiagomistral.github.io/SecJSON#aes128-cbc',
+      keyEncryptionAlgorighm: 'http://tiagomistral.github.io/SecJSON#rsa-oaep-mgf1p'
     };
 
     var decryptOptions = {
