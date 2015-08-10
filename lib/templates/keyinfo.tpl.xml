@@ -1,6 +1,6 @@
 "KeyInfo": {
 	"EncryptedKey" : {
-		"EncryptedMethod": {
+		"EncryptionMethod": {
 			"Algorithm": "<%= keyEncryptionMethod %>",
 			"DigestMethod" : {
 				"Algorithm": "http://tiagomistral.github.io/SecJSON#sha1"
