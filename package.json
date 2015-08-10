@@ -5,14 +5,14 @@
   "main": "./lib",
   "dependencies": {
     "node-rsa": "~0.2.23",
-    "async": "~1.2.0",
+    "async": "~1.4.2",
     "deasync": "~0.1.0",
     "ejs": "~2.3.1",
     "node-forge": "~0.6.29"
   },
   "devDependencies": {
     "mocha": "*",
-    "should": "~6.0.1"
+    "should": "~7.0.3"
   },
   "scripts": {
     "test": "mocha"
