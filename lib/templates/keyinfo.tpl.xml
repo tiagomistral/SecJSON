@@ -1,9 +1,14 @@
 "KeyInfo": {
-  "EncryptedMethod": {
-    "Algorithm": "<%= keyEncryptionMethod %>"
-  },
-  "KeyInfo": "<%- encryptionPublicCert %>",
-  "CipherData": {
-    "CipherValue": "<%= encryptedKey %>"
-  }
+	"EncryptedKey" : {
+		"EncryptedMethod": {
+			"Algorithm": "<%= keyEncryptionMethod %>",
+			"DigestMethod" : {
+				"Algorithm": "http://tiagomistral.github.io/SecJSON#sha1"
+			}
+		},
+		"KeyInfo": "<%- encryptionPublicCert %>",
+		"CipherData": {
+			"CipherValue": "<%= encryptedKey %>"
+		}
+	}
 }
