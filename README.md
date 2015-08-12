@@ -33,7 +33,9 @@ Result:
 ~~~json
 {
     "EncryptedData":{
-        "EncryptionMethod":"http://tiagomistral.github.io/SecJSON#aes128-cbc",
+        "EncryptionMethod": {
+            "Algorithm": "http://tiagomistral.github.io/SecJSON#aes128-cbc"
+        },
         "EncryptedKey":{
             "EncryptionMethod":{
                 "Algorithm":"http://tiagomistral.github.io/SecJSON#rsa-oaep-mgf1p",
@@ -145,7 +147,9 @@ Result:
             },
             {
                 "EncryptedData":{
-                    "EncryptionMethod":"http://tiagomistral.github.io/SecJSON#aes128-cbc",
+                    "EncryptionMethod": {
+                        "Algorithm": "http://tiagomistral.github.io/SecJSON#aes128-cbc"
+                    },
                     "EncryptedKey":{
                         "EncryptionMethod":{
                             "Algorithm":"http://tiagomistral.github.io/SecJSON#rsa-oaep-mgf1p",

@@ -1,6 +1,8 @@
 {
 	"EncryptedData": {
-		"EncryptionMethod": "<%= contentEncryptionMethod %>",
+		"EncryptionMethod": {
+      		"Algorithm": "<%= contentEncryptionMethod %>"
+      	},
 		<%- keyInfo %>,
 		"CipherData": {
 			"CipherValue": "<%= encryptedContent %>"
