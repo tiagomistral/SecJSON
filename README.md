@@ -33,19 +33,21 @@ Result:
 ~~~json
 {
     "EncryptedData":{
-        "EncryptionMethod": {
-            "Algorithm": "http://tiagomistral.github.io/SecJSON#aes128-cbc"
+        "EncryptionMethod":{
+            "Algorithm":"http://tiagomistral.github.io/SecJSON#aes128-cbc"
         },
-        "EncryptedKey":{
-            "EncryptionMethod":{
-                "Algorithm":"http://tiagomistral.github.io/SecJSON#rsa-oaep-mgf1p",
-                "DigestMethod":{
-                    "Algorithm":"http://tiagomistral.github.io/SecJSON#sha1"
+        "KeyInfo":{
+            "EncryptedKey":{
+                "EncryptionMethod":{
+                    "Algorithm":"http://tiagomistral.github.io/SecJSON#rsa-oaep-mgf1p",
+                    "DigestMethod":{
+                        "Algorithm":"http://tiagomistral.github.io/SecJSON#sha1"
+                    }
+                },
+                "KeyInfo":"MIIEDzCCAveg...[base64 cert]...q3uaLvlAUo=",
+                "CipherData":{
+                    "CipherValue":"Ad/F7DvLVc...[encrypted symmetric key]...0bb2VrjXcTZxQ=="
                 }
-            },
-            "KeyInfo":"MIIEDzCCAveg...[base64 cert]...q3uaLvlAUo=",
-            "CipherData":{
-                "CipherValue":"Ad/F7DvLVc...[encrypted symmetric key]...0bb2VrjXcTZxQ=="
             }
         },
         "CipherData":{
@@ -147,19 +149,21 @@ Result:
             },
             {
                 "EncryptedData":{
-                    "EncryptionMethod": {
-                        "Algorithm": "http://tiagomistral.github.io/SecJSON#aes128-cbc"
+                    "EncryptionMethod":{
+                        "Algorithm":"http://tiagomistral.github.io/SecJSON#aes128-cbc"
                     },
-                    "EncryptedKey":{
-                        "EncryptionMethod":{
-                            "Algorithm":"http://tiagomistral.github.io/SecJSON#rsa-oaep-mgf1p",
-                            "DigestMethod":{
-                                "Algorithm":"http://tiagomistral.github.io/SecJSON#sha1"
+                    "KeyInfo":{
+                        "EncryptedKey":{
+                            "EncryptionMethod":{
+                                "Algorithm":"http://tiagomistral.github.io/SecJSON#rsa-oaep-mgf1p",
+                                "DigestMethod":{
+                                    "Algorithm":"http://tiagomistral.github.io/SecJSON#sha1"
+                                }
+                            },
+                            "KeyInfo":"MIIEDzCCAveg...[base64 cert]...q3uaLvlAUo=",
+                            "CipherData":{
+                                "CipherValue":"nBZdvu0Go+Qp...[encrypted symmetric key]...hoCJR5NVxOdgdJcGClg=="
                             }
-                        },
-                        "KeyInfo":"MIIEDzCCAveg...[base64 cert]...q3uaLvlAUo=",
-                        "CipherData":{
-                            "CipherValue":"nBZdvu0Go+Qp...[encrypted symmetric key]...hoCJR5NVxOdgdJcGClg=="
                         }
                     },
                     "CipherData":{
