@@ -9,8 +9,8 @@
                 "EncryptionMethod":{
                     "$ref":"#/definitions/EncryptionMethod"
                 },
-                "EncryptedKey":{
-                    "$ref":"#/definitions/EncryptedKey"
+                "KeyInfo":{
+                    "$ref":"#/definitions/KeyInfo"
                 },
                 "CipherData":{
                     "$ref":"#/definitions/CipherData"
@@ -18,7 +18,7 @@
             },
             "required":[
                 "EncryptionMethod",
-                "EncryptedKey",
+                "KeyInfo",
                 "CipherData"
             ],
             "additionalProperties":false
@@ -46,23 +46,25 @@
                 "Algorithm"
             ]
         },
-        "EncryptedKey":{
-            "title":"EncryptedKey",
-            "type":"object",
-            "properties ":{
-                "EncryptionMethod":{
-                    "type":"object"
+        "KeyInfo":{
+            "EncryptedKey":{
+                "title":"EncryptedKey",
+                "type":"object",
+                "properties ":{
+                    "EncryptionMethod":{
+                        "type":"object"
+                    },
+                    "KeyInfo":"string",
+                    "CipherData":{
+                        "type":"object"
+                    }
                 },
-                "KeyInfo":"string",
-                "CipherData":{
-                    "type":"object"
-                }
-            },
-            "required":[
-                "EncryptionMethod",
-                "KeyInfo",
-                "CipherData"
-            ]
+                "required":[
+                    "EncryptionMethod",
+                    "KeyInfo",
+                    "CipherData"
+                ]
+            }
         },
         "CipherData":{
             "title":"CipherData",
