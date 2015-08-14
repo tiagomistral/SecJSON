@@ -96,13 +96,13 @@
             "type":"object",
             "properties ":{
                 "EncryptionMethod":{
-                    "type":"object"
+                    "$ref":"#/definitions/EncryptionMethod"
                 },
                 "KeyInfo":{
                     "$ref":"#/definitions/KeyInfo"
                 },
                 "CipherData":{
-                    "type":"object"
+                    "$ref":"#/definitions/CipherData"
                 }
             },
             "required":[

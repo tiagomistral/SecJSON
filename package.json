@@ -11,7 +11,9 @@
     "node-forge": "~0.6.29"
   },
   "devDependencies": {
+    "coveralls": "^2.11.4",
     "mocha": "*",
+    "mocha-lcov-reporter": "0.0.2",
     "should": "~7.0.3"
   },
   "scripts": {
