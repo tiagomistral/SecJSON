@@ -3,7 +3,7 @@
 [![Dependency Status][david-image]][david-url]
 [![License][license-image]][license-url]
 [![Downloads][downloads-image]][downloads-url]
-[![Test coverage][coveralls-image]][coveralls-url]
+<!---[![Test coverage][coveralls-image]][coveralls-url]-->
 
 Secure JSON implementation for node.js. 
 SecJSON allow encrypt/decrypt a message or a specific value of an JSON object.
@@ -44,7 +44,9 @@ Result:
                         "Algorithm":"http://tiagomistral.github.io/SecJSON#sha1"
                     }
                 },
-                "KeyInfo":"MIIEDzCCAveg...[base64 cert]...q3uaLvlAUo=",
+                "KeyInfo": {
+                   "RetrievalMethod": "MIIEDzCCAveg...[base64 cert]...q3uaLvlAUo="
+                },
                 "CipherData":{
                     "CipherValue":"Ad/F7DvLVc...[encrypted symmetric key]...0bb2VrjXcTZxQ=="
                 }
@@ -160,7 +162,9 @@ Result:
                                     "Algorithm":"http://tiagomistral.github.io/SecJSON#sha1"
                                 }
                             },
-                            "KeyInfo":"MIIEDzCCAveg...[base64 cert]...q3uaLvlAUo=",
+                            "KeyInfo": {
+                                "RetrievalMethod": "MIIEDzCCAveg...[base64 cert]...q3uaLvlAUo="
+                            },
                             "CipherData":{
                                 "CipherValue":"nBZdvu0Go+Qp...[encrypted symmetric key]...hoCJR5NVxOdgdJcGClg=="
                             }

@@ -6,7 +6,9 @@
 				"Algorithm": "http://tiagomistral.github.io/SecJSON#sha1"
 			}
 		},
-		"KeyInfo": "<%- encryptionPublicCert %>",
+		"KeyInfo": {
+			"RetrievalMethod": "<%- encryptionPublicCert %>"
+		},
 		"CipherData": {
 			"CipherValue": "<%= encryptedKey %>"
 		}

@@ -27,6 +27,7 @@
     "required":[
         "EncryptedData"
     ],
+    "additionalProperties":false,
     "definitions":{
         "EncryptionMethod":{
             "title":"EncryptionMethod",
@@ -47,24 +48,32 @@
             ]
         },
         "KeyInfo":{
-            "EncryptedKey":{
-                "title":"EncryptedKey",
-                "type":"object",
-                "properties ":{
-                    "EncryptionMethod":{
-                        "type":"object"
+            "title":"KeyInfo",
+            "type":"object",
+            "oneOf":[
+                {
+                    "type":"object",
+                    "properties":{
+                        "EncryptedKey":{
+                            "$ref":"#/definitions/EncryptedKey"
+                        }
                     },
-                    "KeyInfo":"string",
-                    "CipherData":{
-                        "type":"object"
-                    }
+                    "required":[
+                        "EncryptedKey"
+                    ]
                 },
-                "required":[
-                    "EncryptionMethod",
-                    "KeyInfo",
-                    "CipherData"
-                ]
-            }
+                {
+                    "type":"object",
+                    "properties":{
+                        "RetrievalMethod":{
+                            "$ref":"#/definitions/RetrievalMethod"
+                        }
+                    },
+                    "required":[
+                        "RetrievalMethod"
+                    ]
+                }
+            ]
         },
         "CipherData":{
             "title":"CipherData",
@@ -81,6 +90,29 @@
                     ]
                 }
             }
+        },
+        "EncryptedKey":{
+            "title":"EncryptedKey",
+            "type":"object",
+            "properties ":{
+                "EncryptionMethod":{
+                    "type":"object"
+                },
+                "KeyInfo":{
+                    "$ref":"#/definitions/KeyInfo"
+                },
+                "CipherData":{
+                    "type":"object"
+                }
+            },
+            "required":[
+                "EncryptionMethod",
+                "KeyInfo",
+                "CipherData"
+            ]
+        },
+        "RetrievalMethod":{
+            "type":"string"
         }
     }
 }
