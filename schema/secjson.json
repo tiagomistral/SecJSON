@@ -78,18 +78,30 @@
         "CipherData":{
             "title":"CipherData",
             "type":"object",
-            "properties":{
-                "CipherValue":{
+            "oneOf":[
+                {
+                    "type":"object",
                     "properties":{
                         "CipherValue":{
-                            "type":"string"
+                            "$ref":"#/definitions/CipherValue"
                         }
                     },
                     "required":[
                         "CipherValue"
                     ]
+                },
+                {
+                    "type":"object",
+                    "properties":{
+                        "CipherReference":{
+                            "$ref":"#/definitions/CipherReference"
+                        }
+                    },
+                    "required":[
+                        "CipherReference"
+                    ]
                 }
-            }
+            ]
         },
         "EncryptedKey":{
             "title":"EncryptedKey",
@@ -113,6 +125,47 @@
         },
         "RetrievalMethod":{
             "type":"string"
+        },
+        "CipherReference":{
+            "title":"CipherReference",
+            "type":"object",
+            "properties":{
+                "URI":{
+                    "type":"string"
+                },
+                "Transforms":{
+                    "type":"object",
+                    "properties":{
+                        "Transform":{
+                            "type":"object",
+                            "properties":{
+                                "Algorithm":{
+                                    "type":"string"
+                                }
+                            },
+                            "required":[
+                                "Algorithm"
+                            ]
+                        },
+                        "Algorithm":{
+                            "type":"string"
+                        }
+                    },
+                    "required":[
+                        "Algorithm"
+                    ]
+                }
+            },
+            "required":[
+                "URI"
+            ]
+        },
+        "CipherValue":{
+            "properties":{
+                "CipherValue":{
+                    "type":"string"
+                }
+            }
         }
     }
 }
