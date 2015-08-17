@@ -1,6 +1,6 @@
 {
   "name": "secjson",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Additional security mechanism that use cryptographic methods to protect the payload of a JSON message",
   "main": "./lib",
   "dependencies": {
