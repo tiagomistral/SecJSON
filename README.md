@@ -26,7 +26,7 @@ var options = {
 
 secjson.encrypt('content to encrypt', options, function(err, result) { 
 	console.log(result);
-}
+});
 ~~~
 
 Result:
@@ -133,7 +133,7 @@ var options = {
 
 secjson.jsonEncrypt(obj, 'store.book[1]', options, function(err, encryptJsonObject) { 
 	console.log(JSON.stringify(encryptJsonObject));
-}
+});
 ~~~
 
 Result:
