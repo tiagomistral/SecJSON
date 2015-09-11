@@ -5,13 +5,6 @@ var secjson = require('secjson'),
     fs = require('fs');
 var lista = ["8000","8001","8002","8003"];
 
-var requestData = {
-    "8000": "teste8000",
-    "8001": "teste8001",
-    "8002": "teste8002",
-    "8003": "teste8003"
-  };
-
 var enc_options = {
     rsa_pub: fs.readFileSync(__dirname + '/test-auth0_rsa.pub'),
     pem: fs.readFileSync(__dirname + '/test-auth0.pem'),
@@ -36,33 +29,41 @@ var options = {
 
 
 function requestFunction(res) {
-  console.log("statusCode: ", res.statusCode);
-  console.log("headers: ", res.headers);
+  //console.log("statusCode: ", res.statusCode);
+  //console.log("headers: ", res.headers);
 
   res.on('data', function(d) {
-    process.stdout.write(d);
+    //process.stdout.write(d);
+    console.timeEnd(d);
   });
   req.on('error', function(e) {
     console.error(e);
   });
 }
+var requestData = JSON.parse(fs.readFileSync(__dirname +'/../../FileTests/simpleteste.js', 'utf8'));
 
-console.time("dbsave");
 //encrypt data
 for (index = 0; index < lista.length; ++index) {
-  secjson.jsonEncrypt(requestData, lista[index], enc_options, function(err, encryptJsonObject) { 
+  console.time("dbsave");
+  var xpto = "[" + index + "]";
+  secjson.jsonEncrypt(requestData, xpto, enc_options, function(err, encryptJsonObject) { 
       //console.log(JSON.stringify(encryptJsonObject));
       requestData = encryptJsonObject;
+      console.timeEnd("dbsave");
   });
 };
+
+
 //send data
-for (index = 0; index < lista.length; ++index) {
+var index = process.argv[2];
+//for (index = 0; index < lista.length; ++index) {
+  var xpto = "[" + index + "]";
+  console.time(xpto);//teste
   options.port = lista[index];
   var req = http.request(options, requestFunction);
   req.write(JSON.stringify({
-    "id": lista[index],
+    "id": xpto,
     "json": requestData
   }));
   req.end();
-}
-console.timeEnd("dbsave");
+//}

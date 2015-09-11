@@ -20,15 +20,18 @@ function serverBehavior(req, res) {
 
   // the end event tells you that you have entire body
   req.on('end', function () {
-	console.log(body);
-    })
+	 //console.log(body);
+    res.writeHead(200);
+    res.end(JSON.parse(body).id);
+   
+  })
 
   // write back something interesting to the user:
-  res.writeHead(200);
-  res.end("JSON received\n");
+  //console.log("done");
   };
 
 https.createServer(options, serverBehavior).listen(8000);
 https.createServer(options, serverBehavior).listen(8001);
 https.createServer(options, serverBehavior).listen(8002);
 https.createServer(options, serverBehavior).listen(8003);
+https.createServer(options, serverBehavior).listen(8004);
